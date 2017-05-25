@@ -3,7 +3,7 @@
       THE ESSENCE OF USING CALLBACK FUNCTIONS IN JAVASCRIPT
   -------------------------------------------------------------
   
-  source:
+  Code based on examples from:
   - http://javascriptissexy.com/understand-javascript-callback-functions-and-use-them/
   
   A Javascript function is a first class object:
