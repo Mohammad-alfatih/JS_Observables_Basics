@@ -54,7 +54,7 @@ function getInput(firstname, lastname, callbackFunction, object) {
     callbackFunction.apply(object, [firstname, lastname]);
   }
   console.log(sampleObject.name);
-  console.log(window.name + "Hi")
+  console.log(window.name + "Salams")
 }
 
 getInput("Anas","ibn Maalik", sampleObject.setName, sampleObject);
@@ -84,3 +84,116 @@ function getUserInput(firstname, lastname, gender, callback) {
 
 getUserInput("Jameel","Finch","man",genericPoemMaker);
 getUserInput("Hassan","Al Somali","man",greetUser);
+
+// Scoping Example with "setTimeout":
+var name = "the global name";
+var waitTime = 1000
+
+var waitingObject = {
+  name: "The waitingObject object",
+  waitTime: 1000,
+  myself: this,
+  
+  talk: function() {
+    setTimeout(function() {
+      console.log(name);
+      console.log(waitTime);
+    }, 1000);
+    //console.log(myself.name);
+  }
+}
+
+function myClass() {
+  this.name = "The waitingClass object";
+  this.waitTime = 1500;
+  var myself = this;
+  
+  this.talk = function() {
+    setTimeout(function() {
+      console.log(myself.name);
+      console.log(myself.waitTime);
+    }, 1500);
+  }
+}
+
+waitingObject.talk();
+
+classObject = new myClass();
+classObject.talk();
+
+// FUN WITH CLOSURES
+// Closures have access to the outer function's variables even after returning:
+
+function compileWinner(firstName) {
+  var intro = "And the winner is ";
+  function addLastName(lastName) {
+    return intro + firstName + " " + lastName;
+  }
+  return addLastName;
+}
+
+var winner = compileWinner("Sufyaan");
+
+setTimeout(function() { console.log(winner("Al Thawree")); }, 2000);
+
+
+// DEEP NESTED CLOSURES
+
+function red(x) {
+  function gre(y) {
+    function yel(z) {
+      return x*y*z;
+    }
+    return yel;
+  }
+  return gre;
+}
+
+console.log(red(4)(2)(3));
+
+var deepNumber = red(3)(5);
+
+console.log(deepNumber(2));
+
+
+// Closures store references to the outer function's variables.
+
+function myIdCalculator() {
+  var myID = 987;
+  
+  return { 
+    getID: function() { return myID; },
+    setID: function(newID) { this.myID = newID; }
+  }
+}
+
+var declaredID = myIdCalculator();
+console.log(declaredID.getID());
+declaredID.setID(765);
+console.log(declaredID.myID);
+console.log(declaredID.getID());
+// note: "getID" only references the first value of "myID" and doesn't update.
+
+// Closures don't play nice with variables that have been changed by loops.
+
+function superNameDeluxer(theNames) {
+  var i;
+  var uniqueID = 100;
+  
+  for(i=0;i<theNames.length;i++) {
+    theNames[i]["id"] = function() { return uniqueID + i; }
+  }
+  
+  return theNames;
+}
+
+var setOfNames = [{name:"Yusuf",id:0},{name:"Daoud",id:0},{name:"Ismail",id:0}];
+
+var giveIdToNames = superNameDeluxer(setOfNames);
+
+yusufID = giveIdToNames[0];
+console.log(yusufID.id());
+
+
+
+
