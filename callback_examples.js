@@ -3,6 +3,9 @@
       THE ESSENCE OF USING CALLBACK FUNCTIONS IN JAVASCRIPT
   -------------------------------------------------------------
   
+  source:
+  - http://javascriptissexy.com/understand-javascript-callback-functions-and-use-them/
+  
   A Javascript function is a first class object:
   - It can be passed in as an argument to another function.
   - Can be executed from within a function it was passed into.
@@ -68,7 +71,7 @@ function genericPoemMaker(name, gender) {
 }
 
 function greetUser(name, gender) {
-  var salutation = gender&&gender === "man" ? "Mr." : "Ms.";
+  var salutation = gender === "man" ? "Mr." : "Ms.";
   console.log("Hello " + salutation + " " + name + "!");
 }
 
@@ -81,8 +84,3 @@ function getUserInput(firstname, lastname, gender, callback) {
 
 getUserInput("Jameel","Finch","man",genericPoemMaker);
 getUserInput("Hassan","Al Somali","man",greetUser);
-
-
-
-
-
