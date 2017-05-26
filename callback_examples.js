@@ -16,7 +16,7 @@
   * Callback functions are also named "higher order functions".
     - A higher order function is a function that's passed in as an argument, then executed inside the other function.
 */
-
+  
 // EXAMPLE 1: Passing an anonymous function to a forEach loop as a parameter.
 
 var names = ["Abu Bakr", "Umar", "Uthman", "Ali"];

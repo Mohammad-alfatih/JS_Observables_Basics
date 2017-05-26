@@ -1,7 +1,7 @@
 # JS_Observables_Basics
 Learning about observables in JS from the bottom up.
 
-CALLBACK FUNCTIONS INTRO:
+CALLBACK FUNCTIONS:
 Notes taken from: http://javascriptissexy.com/understand-javascript-callback-functions-and-use-them/
 
 Make Your Own Callback Functions
@@ -46,3 +46,39 @@ Basic Principles when Implementing Callback Functions
     We can pass more than one callback functions into the parameter of a function, just like we can pass more than one variable.
 - “Callback Hell” Problem And Solution
     In asynchronous code execution, which is simply execution of code in any order, sometimes it is common to have numerous levels of callback functions to the extent that you have code that looks like the following. The messy code below is called callback hell because of the difficulty of following the code due to the many callbacks.
+
+
+UNDERSTANDING THE WEIRD PARTS OF JAVASCRIPT
+
+Important side concepts: A few key terms
+- Syntax parsers:
+    A program that reads your code to validate its grammar & determine what it does (a compiler or interpreter).
+- Execution contexts
+    A wrapper to help manage the code that is running (scope).
+- Lexical environments
+    Where something sits physically in the code you write.
+- Name/Value pairs
+    A name which maps to a unique value. Can only have one value in s single execution context.
+    An javascript object is a collection of name/value pairs.
+
+Global Context: not inside a function.
+    The global context 'window' or 'this' is available without writing any lines of code.
+
+Every object has the following context variables:
+- Object: the execution context w/n the object.
+- this: a special variable referring to context.
+- Outer Environment: Is null w/in global object.
+- Your code: variables & functions.
+
+The Execution Context - Creation & Hoisting: 
+- How does JS create the execution context?
+- The execution context is created in two phases
+    Creation phase: 
+        Global object, this, outer environment are initiated.
+        Set up memory space for variables & functions (hoisting).
+        Functions are placed in memory in their entirety.
+        Variables are all declared as 'undefined'.
+    Execution phase:
+        Variable assignments are set up in the execution phase.
+
+Important side concepts: Javascript & 'undefined'
