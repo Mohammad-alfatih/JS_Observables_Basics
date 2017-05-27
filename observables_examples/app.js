@@ -19,6 +19,12 @@ Rx.Observable.fromEvent(btnRed, 'click')
   .map(event => [event.clientX, event.clientY])
   .subscribe(observer);
 
+var subscription = Rx.Observable.create(obs => btnGreen.onclick = event => obs.next(event))
+  .map(event => [event.clientX, event.clientY])
+  .subscribe(observer);
+
+setTimeout(() => subscription.unsubscribe(), 10000);
+
 Rx.Observable.create(obs => {
     obs.next('First value');
     setTimeout(() => obs.complete(), 2000);
@@ -26,8 +32,9 @@ Rx.Observable.create(obs => {
     obs.next('Second value');
   }).subscribe(observer);
 
-var subscription = Rx.Observable.create(obs => btnGreen.onclick = event => obs.next(event))
-  .map(event => [event.clientX, event.clientY])
-  .subscribe(observer);
+var observable = Rx.Observable.interval(2000);
+var newObserver = { next: (event) => console.log(event) }
 
-setTimeout(() => subscription.unsubscribe(), 10000);
+var newSubscription = observable.map((value) => value + ' x 12 = ' + value * 12).throttleTime(4000).subscribe(newObserver);
+
+setTimeout(() => newSubscription.unsubscribe(), 28000);
