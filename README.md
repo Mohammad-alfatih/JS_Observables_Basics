@@ -50,7 +50,7 @@ Basic Principles when Implementing Callback Functions
 
 UNDERSTANDING THE WEIRD PARTS OF JAVASCRIPT
 
-Important side concepts: A few key terms
+Important side concepts: A few key terms.
 - Syntax parsers:
     A program that reads your code to validate its grammar & determine what it does (a compiler or interpreter).
 - Execution contexts
@@ -70,15 +70,48 @@ Every object has the following context variables:
 - Outer Environment: Is null w/in global object.
 - Your code: variables & functions.
 
-The Execution Context - Creation & Hoisting: 
+The Execution Context - Creation & Hoisting:
+- Each execution context has it's own 'this' variable associated with it.
+- An execution context is also known as 'scope'.
 - How does JS create the execution context?
 - The execution context is created in two phases
     Creation phase: 
-        Global object, this, outer environment are initiated.
-        Set up memory space for variables & functions (hoisting).
-        Functions are placed in memory in their entirety.
-        Variables are all declared as 'undefined'.
+        - Global object, 'this', outer environment are initiated.
+        - Set up memory space for variables & functions (hoisting).
+        - Functions are placed in memory in their entirety.
+        - Variables are all declared as 'undefined'.
     Execution phase:
-        Variable assignments are set up in the execution phase.
+        - Setup & assign variables.
+        - Run your code, line by line.
 
-Important side concepts: Javascript & 'undefined'
+Important side concepts: Javascript & 'undefined'.
+- Undefined is the value that variables receive during the creation phase.
+- Variables accessed before assignment return 'undefined' b/c creation phase.
+
+Important side concepts: Single threaded, synchronous execution.
+- One command is being executed at a time, in order.
+- This isn't the case in the browser, since many things happen simultaneously.
+
+Function incovation & the execution stack:
+- The global execution context puts everything in memory, then executes code.
+- What happens when you invoke a function?
+- A new execution context is created & placed on the execution stack.
+- This starts a new create phase w/in the function then executes it.
+- A stack is simply one execution context on top of another.
+- The context being run is always the one on top.
+- Whenever you run a function, a new context is made & put on top of the stack.
+- After a method is run, it's popped of the top of the stack, then the next.
+
+Functions, context, and variable environments:
+- Variable environment:
+    where the variables live & how they relate to each other in memory.
+- Also referred to as variable scope
+- Each variable exists in an execution context.
+
+The scope chain:
+- JS doesn't just use the variable environment of the currently executing context.
+- At creation, each execution context has a reference to it's outer environment.
+- Think of an outer envirionment as the context wherein an ex context is declared.
+- The outer environment is the lexical environment (where the code is sitting).
+- When you call a variable, JS looks at the ex context, then in it's 'outer environment.
+- When looking for a variable definition, JS goes outwards from one scope to a higher scope until reaching global, this is called the scope chain.
