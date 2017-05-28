@@ -2,7 +2,7 @@ div {
   margin: 15px 0;
   padding: 10px 5px;
 }
-button {
+button, .btn {
   padding: 5px 8px;
   border-top: 3px solid #444;
   border-bottom: 1px solid #444;
@@ -43,14 +43,18 @@ button {
   background: #6f8;
   color: #492;
 }
-button:focus {
+button:focus, .btn:active:focus, .btn:focus {
   outline: none;
+  outline-offset: 0;
 }
-button:active {
+button:active, .btn {
   border-top: 1px solid;
   border-bottom: 1px solid;
   border-left: 1px solid;
   border-right: 1px solid;
   box-shadow: -1px 1px 2px #888;
   margin-bottom: 2px;
+}
+.btn-group div {
+    padding: 10px 0;
 }

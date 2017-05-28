@@ -1,12 +1,13 @@
 var btnBlue = document.getElementById('blue');
 var btnRed = document.getElementById('red');
 var btnGreen = document.getElementById('green');
+var results = document.getElementById('results');
 // button.addEventListener('click', event => console.log(event));
 
 Rx.Observable.fromEvent(btnBlue, 'click')
   .throttleTime(300)
-  .map(event => [event.clientX,event.clientY])
-  .subscribe(event => console.log(event));
+  .map(event => [event.clientX, event.clientY])
+  .subscribe(event => results.innerHTML(event));
 
 var observer = {
   next: (event) => console.log(event),
