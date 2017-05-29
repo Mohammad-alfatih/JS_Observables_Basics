@@ -1,19 +1,18 @@
 var btnBlue = document.getElementById('blue');
 var btnRed = document.getElementById('red');
 var btnGreen = document.getElementById('green');
-var results = document.getElementById('results');
+var results = document.getElementById('results');//.innerHTML = 'Please click on a button to map your click coordinates';
 // button.addEventListener('click', event => console.log(event));
+var observer = {
+  next: (event) => results.innerHTML = 'You have clicked on the following coordinates: <strong>' + event + '</strong>',
+  error: (error) => console.log(error),
+  complete: () => console.log('Completed!')
+}
 
 Rx.Observable.fromEvent(btnBlue, 'click')
   .throttleTime(300)
   .map(event => [event.clientX, event.clientY])
-  .subscribe(event => results.innerHTML(event));
-
-var observer = {
-  next: (event) => console.log(event),
-  error: (error) => console.log(error),
-  complete: () => console.log('Completed!')
-}
+  .subscribe(observer);
 
 Rx.Observable.fromEvent(btnRed, 'click')
   .throttleTime(300)
@@ -26,6 +25,7 @@ var subscription = Rx.Observable.create(obs => btnGreen.onclick = event => obs.n
 
 setTimeout(() => subscription.unsubscribe(), 10000);
 
+// Example of the create method from Rxjs.
 Rx.Observable.create(obs => {
     obs.next('First value');
     setTimeout(() => obs.complete(), 2000);
